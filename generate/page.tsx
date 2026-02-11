@@ -122,9 +122,14 @@ const App: React.FC = () => {
               />
             </div>
             <h1 className="text-primary text-xl md:text-2xl font-black leading-snug tracking-tight text-center mb-6">
-              Maine ye website sirf apni pasandida{" "}
-              <span>{realGender === "male" ? "mard" : "aurat"}</span> ke liye
-              banaya hai. Don't you dare to enter otherwise I'll kill you.
+              Maine ye website sirf
+              <span>
+                {realGender === "male"
+                  ? "apne pasandida mard"
+                  : "apni pasandida aurat"}
+              </span>{" "}
+              ke liye banaya hai. Don't you dare to enter otherwise I'll kill
+              you.
             </h1>
             <input
               type="text"
