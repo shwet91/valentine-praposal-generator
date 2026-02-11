@@ -29,7 +29,7 @@ const LandingPage: React.FC = () => {
         throw new Error(data.message || "Failed to generate proposal");
       }
 
-      setGeneratedUrl(`http://localhost:3000/generate/${data.user.userId}`);
+      setGeneratedUrl(`https://valentine-praposal-generator.vercel.app/generate/${data.user.userId}`);
 
       // Show success modal
       setShowSuccessModal(true);
