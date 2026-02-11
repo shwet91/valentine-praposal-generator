@@ -125,8 +125,8 @@ const App: React.FC = () => {
               Maine ye website sirf
               <span>
                 {realGender === "male"
-                  ? "apne pasandida mard"
-                  : "apni pasandida aurat"}
+                  ? " apne pasandida mard"
+                  : " apni pasandida aurat"}
               </span>{" "}
               ke liye banaya hai. Don't you dare to enter otherwise I'll kill
               you.
