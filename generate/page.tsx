@@ -76,7 +76,7 @@ const App: React.FC = () => {
   const handleAuthenticate = async () => {
     const value = nameInput.trim().toLowerCase();
 
-    // checks if "rainy" appears anywhere
+    // checks if "" appears anywhere
     if (value.includes(`${realName.toLowerCase()}`)) {
       setIsAuthenticated(true);
     } else {
