@@ -62,7 +62,7 @@ const LandingPage: React.FC = () => {
           {/* Name Input */}
           <div className="w-full mb-5">
             <label className="block text-slate-700 font-bold mb-2 text-sm">
-              Name of your love
+              Name of your partner
             </label>
             <input
               type="text"
@@ -76,7 +76,7 @@ const LandingPage: React.FC = () => {
           {/* Gender Input */}
           <div className="w-full mb-8">
             <label className="block text-slate-700 font-bold mb-3 text-sm">
-              Gender
+              Gender of your partner
             </label>
             <div className="flex flex-col gap-3">
               {["Male", "Female"].map((option) => (
