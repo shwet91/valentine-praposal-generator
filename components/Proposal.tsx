@@ -6,6 +6,7 @@ interface Props {
   onAccept: () => void;
   onNoThirdClick?: () => void;
   realName: string;
+  isMobile: boolean;
 }
 
 const allGifs = [
@@ -50,7 +51,12 @@ const ESCAPE_SPOTS: Array<{ xFrac: number; yFrac: number }> = [
   { xFrac: 0.78, yFrac: 0.72 }, // lower-right area
 ];
 
-const Proposal: React.FC<Props> = ({ onAccept, onNoThirdClick, realName }) => {
+const Proposal: React.FC<Props> = ({
+  onAccept,
+  onNoThirdClick,
+  realName,
+  isMobile,
+}) => {
   const [noCount, setNoCount] = useState(0);
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const noBtnRef = useRef<HTMLButtonElement>(null);
@@ -295,7 +301,10 @@ const Proposal: React.FC<Props> = ({ onAccept, onNoThirdClick, realName }) => {
             x: noX,
             y: noY,
           }}
-          className="group relative flex flex-col min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl py-4 px-10 bg-primary text-white font-bold hover:bg-primary/90 border-2 border-primary/5 whitespace-nowrap"
+          className={
+            "group relative inline-flex flex-col items-center justify-center rounded-2xl px-6 py-3 bg-primary text-white font-bold hover:bg-primary/90 border border-primary/10" +
+            (noCount === 3 && isMobile && " hidden")
+          }
         >
           <img
             // src="./gif/crying.gif"
@@ -310,7 +319,7 @@ const Proposal: React.FC<Props> = ({ onAccept, onNoThirdClick, realName }) => {
             }
             alt="No"
             className={
-              "w-16 h-16 object-contain mb-1" +
+              "w-16 h-16 object-contain mb-1 " +
               (noCount === 2 ? " w-48 h-64 rounded-2xl relative z-10" : "")
             }
           />

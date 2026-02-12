@@ -22,7 +22,6 @@ const App: React.FC = () => {
   const [realGender, setRealGender] = useState("");
 
   useEffect(() => {
-
     const fetchProposalStatus = async () => {
       if (!userId) {
         setApiLoading(false);
@@ -46,10 +45,8 @@ const App: React.FC = () => {
 
         setRealName(response.user.name);
         setRealGender(response.user.gender);
-
-
       } catch (error) {
-        console.error("Error fetching proposal status:", error); 
+        console.error("Error fetching proposal status:", error);
       } finally {
         setApiLoading(false);
       }
@@ -58,16 +55,14 @@ const App: React.FC = () => {
     fetchProposalStatus();
   }, [userId]);
 
-  // useEffect(() => {
-  //   const checkMobile = () => setIsMobile(window.innerWidth < 768);
-  //   checkMobile();
-  //   window.addEventListener("resize", checkMobile);
-  //   return () => window.removeEventListener("resize", checkMobile);
-  // }, []);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-  const handleNoThirdClick = async () => {
- 
-  };
+  const handleNoThirdClick = async () => {};
 
   const handleAccept = async () => {
     setAccepted(true);
@@ -98,9 +93,9 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen relative flex flex-col items-center justify-center p-4 bg-gradient-valentine overflow-x-hidden selection:bg-primary/20">
-      <Header onSendLove={() => setShowModal(true)} />
+      {!isMobile && <Header onSendLove={() => setShowModal(true)} />}
 
-      <MobileBlocker isVisible={isMobile} />
+      {/* <MobileBlocker isVisible={isMobile} /> */}
 
       <ErrorMessage
         isVisible={showError}
@@ -154,6 +149,7 @@ const App: React.FC = () => {
             onAccept={handleAccept}
             onNoThirdClick={handleNoThirdClick}
             realName={realName}
+            isMobile={isMobile}
           />
         ) : (
           <div className="text-center animate-in zoom-in duration-500 py-20">
