@@ -146,10 +146,10 @@ const Proposal: React.FC<Props> = ({
         const sy =
           pad + spot.yFrac * (vh - rect.height - pad * 2) + rect.height / 2;
 
-        // Check overlap with Yes button
+        // Check overlap with Yes button - use larger margin on mobile
         if (yesBtn) {
           const yesRect = yesBtn.getBoundingClientRect();
-          const margin = 40;
+          const margin = isMobile ? 100 : 40;
           const overlaps =
             sx - rect.width / 2 - margin < yesRect.right &&
             sx + rect.width / 2 + margin > yesRect.left &&
@@ -171,7 +171,7 @@ const Proposal: React.FC<Props> = ({
 
       return bestIndex;
     },
-    [noX, noY],
+    [noX, noY, isMobile],
   );
 
   const handleCursorMove = useCallback(
