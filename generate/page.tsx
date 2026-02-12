@@ -22,7 +22,7 @@ const App: React.FC = () => {
   const [realGender, setRealGender] = useState("");
 
   useEffect(() => {
-    console.log("User ID from URL:", userId);
+
     const fetchProposalStatus = async () => {
       if (!userId) {
         setApiLoading(false);
@@ -47,7 +47,7 @@ const App: React.FC = () => {
         setRealName(response.user.name);
         setRealGender(response.user.gender);
 
-        console.log("Fetched proposal status:", response);
+
       } catch (error) {
         console.error("Error fetching proposal status:", error);
       } finally {
@@ -66,7 +66,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleNoThirdClick = async () => {
-    console.log("No selected!!");
+ 
   };
 
   const handleAccept = async () => {

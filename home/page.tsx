@@ -11,8 +11,7 @@ const LandingPage: React.FC = () => {
 
   const handleSubmit = async () => {
     // Your API call logic here
-    console.log("Love Name:", loveName);
-    console.log("Gender:", gender);
+
 
     try {
       if (isLoading) return; // Prevent multiple submissions
