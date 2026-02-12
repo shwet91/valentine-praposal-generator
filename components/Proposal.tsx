@@ -146,15 +146,20 @@ const Proposal: React.FC<Props> = ({
         const sy =
           pad + spot.yFrac * (vh - rect.height - pad * 2) + rect.height / 2;
 
-        // Check overlap with Yes button - use larger margin on mobile
+        // Check overlap with Yes button - use larger margin especially for the tall gun image
         if (yesBtn) {
           const yesRect = yesBtn.getBoundingClientRect();
-          const margin = isMobile ? 150 : 60;
+          // Increase margin significantly, especially on desktop where overlap is more noticeable
+          // The gun image is w-48 h-64 (192px x 256px), so we need extra vertical clearance
+          const margin = isMobile ? 180 : 150;
+          // Add extra vertical margin for the tall image case
+          const verticalMargin = noCountRef.current === 2 ? margin + 100 : margin;
+          
           const overlaps =
             sx - rect.width / 2 - margin < yesRect.right &&
             sx + rect.width / 2 + margin > yesRect.left &&
-            sy - rect.height / 2 - margin < yesRect.bottom &&
-            sy + rect.height / 2 + margin > yesRect.top;
+            sy - rect.height / 2 - verticalMargin < yesRect.bottom &&
+            sy + rect.height / 2 + verticalMargin > yesRect.top;
           if (overlaps) continue;
         }
 
