@@ -41,14 +41,14 @@ const TRIGGER_RADIUS = 140; // px — how close cursor can get before button tel
 const ESCAPE_SPOTS: Array<{ xFrac: number; yFrac: number }> = [
   { xFrac: 0.05, yFrac: 0.05 }, // top-left corner
   { xFrac: 0.9, yFrac: 0.05 }, // top-right corner
-  { xFrac: 0.05, yFrac: 0.9 }, // bottom-left corner
-  { xFrac: 0.9, yFrac: 0.9 }, // bottom-right corner
-  { xFrac: 0.05, yFrac: 0.45 }, // mid-left
-  { xFrac: 0.9, yFrac: 0.45 }, // mid-right
-  { xFrac: 0.45, yFrac: 0.05 }, // top-center
-  { xFrac: 0.45, yFrac: 0.9 }, // bottom-center
-  { xFrac: 0.2, yFrac: 0.25 }, // upper-left area
-  { xFrac: 0.78, yFrac: 0.72 }, // lower-right area
+  { xFrac: 0.05, yFrac: 0.85 }, // bottom-left corner
+  { xFrac: 0.9, yFrac: 0.85 }, // bottom-right corner
+  { xFrac: 0.05, yFrac: 0.35 }, // mid-left (moved up)
+  { xFrac: 0.9, yFrac: 0.35 }, // mid-right (moved up)
+  { xFrac: 0.3, yFrac: 0.05 }, // top-left-center
+  { xFrac: 0.7, yFrac: 0.05 }, // top-right-center
+  { xFrac: 0.15, yFrac: 0.2 }, // upper-left area
+  { xFrac: 0.85, yFrac: 0.2 }, // upper-right area
 ];
 
 const Proposal: React.FC<Props> = ({
@@ -134,7 +134,7 @@ const Proposal: React.FC<Props> = ({
       const vh = window.innerHeight;
       const pad = 30;
 
-      let bestIndex = 0;
+      let bestIndex = -1;
       let bestDist = -1;
 
       for (let i = 0; i < ESCAPE_SPOTS.length; i++) {
@@ -149,7 +149,7 @@ const Proposal: React.FC<Props> = ({
         // Check overlap with Yes button - use larger margin on mobile
         if (yesBtn) {
           const yesRect = yesBtn.getBoundingClientRect();
-          const margin = isMobile ? 100 : 40;
+          const margin = isMobile ? 150 : 60;
           const overlaps =
             sx - rect.width / 2 - margin < yesRect.right &&
             sx + rect.width / 2 + margin > yesRect.left &&
@@ -169,7 +169,8 @@ const Proposal: React.FC<Props> = ({
         }
       }
 
-      return bestIndex;
+      // If no valid spot found, stay at current spot or pick first corner
+      return bestIndex >= 0 ? bestIndex : excludeSpot >= 0 ? excludeSpot : 0;
     },
     [noX, noY, isMobile],
   );
@@ -277,12 +278,10 @@ const Proposal: React.FC<Props> = ({
 
       {/* Buttons Container */}
       <div className="flex flex-col sm:flex-row gap-6 items-center min-h-[100px]">
-        <motion.button
+        <button
           ref={yesBtnRef}
           onClick={onAccept}
-          animate={{ scale: 1 + noCount * 0.1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="group relative flex flex-col min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl py-4 px-10 bg-primary text-white shadow-2xl shadow-primary/40 active:scale-95 transition-all duration-300 z-20 hover:bg-primary/80 hover:shadow-primary/60"
+          className="group relative flex flex-col min-w-[180px] w-[180px] flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-2xl py-4 px-10 bg-primary text-white shadow-2xl shadow-primary/40 active:scale-95 transition-all duration-300 z-20 hover:bg-primary/80 hover:shadow-primary/60"
         >
           <img
             src="/gif/loving.gif"
@@ -292,7 +291,7 @@ const Proposal: React.FC<Props> = ({
           <span className="flex items-center gap-2 text-xl font-black relative z-10">
             Yes 💖
           </span>
-        </motion.button>
+        </button>
 
         <motion.button
           ref={noBtnRef}
