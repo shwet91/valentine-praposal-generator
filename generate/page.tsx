@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
 
       } catch (error) {
-        console.error("Error fetching proposal status:", error);
+        console.error("Error fetching proposal status:", error); 
       } finally {
         setApiLoading(false);
       }
@@ -58,12 +58,12 @@ const App: React.FC = () => {
     fetchProposalStatus();
   }, [userId]);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  // useEffect(() => {
+  //   const checkMobile = () => setIsMobile(window.innerWidth < 768);
+  //   checkMobile();
+  //   window.addEventListener("resize", checkMobile);
+  //   return () => window.removeEventListener("resize", checkMobile);
+  // }, []);
 
   const handleNoThirdClick = async () => {
  
