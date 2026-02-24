@@ -30,4 +30,9 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script: whoami
+          script: |
+             cd valentine-praposal-generator
+             git pull
+             npm install
+             npm run build
+             npm run preview
