@@ -31,7 +31,10 @@ jobs:
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
           script: |
-             cd valentine-praposal-generator
-             git pull
-             npm install
-             npm run build
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 24
+            cd valentine-praposal-generator
+            git pull
+            npm install
+            npm run build
